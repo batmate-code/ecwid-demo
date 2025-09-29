@@ -9,7 +9,7 @@ interface ProductsGridProps {
   showEmpty?: boolean;
 }
 const ProductsGrid: FC<ProductsGridProps> = ({
-  cols = { xs: 2, md: 3, lg: 3 },
+  cols = { xs: 2, sm: 2, md: 3, lg: 3 },
   children,
   showEmpty,
 }) => {

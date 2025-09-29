@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Badge, Button, Container, Group } from '@mantine/core';
+import { Badge, Button, Container, Flex } from '@mantine/core';
 import { useStore } from '@/store';
 import { selectCartCount, selectCartProducts, selectClearCart } from '@/store/selectors';
 import { useState, type FC } from 'react';
@@ -31,9 +31,9 @@ const CartPage: FC = () => {
 
   return (
     <Container size="lg">
-      <Group justify="space-between" mb="md">
+      <Flex justify="space-between" mb="md" wrap="wrap">
         <BackButton onClick={() => navigate(-1)} />
-        <Group gap="xs">
+        <Flex gap="xs" justify="space-between" align="center">
           <Badge color="dark" variant="light">
             {t('itemsCount', { number: cartCount })}
           </Badge>
@@ -45,8 +45,8 @@ const CartPage: FC = () => {
           >
             {t('clearCartButtonText')}
           </Button>
-        </Group>
-      </Group>
+        </Flex>
+      </Flex>
       <CartView cartProducts={cartProducts} onCheckout={() => setCheckoutOpen(true)} />
       <CheckoutModal
         opened={checkoutOpen}

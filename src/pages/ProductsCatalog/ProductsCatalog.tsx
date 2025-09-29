@@ -23,7 +23,6 @@ const ProductsCatalog: FC = () => {
   const { t } = useTranslation('catalog');
   const { isMobile, isTablet } = useResponsive();
   const { query, sort, page, priceFrom, priceTo, setParams } = useCatalogUrlState();
-  console.log(isMobile);
   const {
     data: categories = [],
     isLoading: isCategoriesLoading,

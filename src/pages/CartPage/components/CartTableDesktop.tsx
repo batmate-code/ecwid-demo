@@ -16,10 +16,11 @@ import {
   Text,
   Image as MantineImage,
 } from '@mantine/core';
-import { IconMinus, IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconTrash } from '@tabler/icons-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import CartItemController from './CartItemController';
 
 interface CartTableProps {
   cartProducts: CartItem[];
@@ -28,7 +29,6 @@ interface CartTableProps {
 
 const CartTableDesktop: FC<CartTableProps> = ({ cartProducts, onCheckout }) => {
   const { t } = useTranslation('cart');
-  const { t: tCommon } = useTranslation('common');
   const { color: anchorColor } = useGetOppositeColor();
 
   const addProduct = useStore(selectAddProduct);
@@ -66,7 +66,7 @@ const CartTableDesktop: FC<CartTableProps> = ({ cartProducts, onCheckout }) => {
           {cartProducts.map((item) => (
             <Table.Tr key={item.id}>
               <Table.Td>
-                <Group>
+                <Group wrap="nowrap">
                   {item.imageUrl ? (
                     <MantineImage
                       src={item.imageUrl}
@@ -86,29 +86,11 @@ const CartTableDesktop: FC<CartTableProps> = ({ cartProducts, onCheckout }) => {
               </Table.Td>
 
               <Table.Td>
-                <Group gap="xs" justify="center">
-                  <ActionIcon
-                    variant="light"
-                    color="dark"
-                    aria-label={tCommon('decreaseProductButtonAriaLabel')}
-                    onClick={() => handleDecrease(item)}
-                  >
-                    <IconMinus size={16} />
-                  </ActionIcon>
-
-                  <Text fw={600} w={36} ta="center">
-                    {item.amount}
-                  </Text>
-
-                  <ActionIcon
-                    variant="light"
-                    color="dark"
-                    aria-label={tCommon('increaseProductButtonAriaLabel')}
-                    onClick={() => handleIncrease(item)}
-                  >
-                    <IconPlus size={16} />
-                  </ActionIcon>
-                </Group>
+                <CartItemController
+                  item={item}
+                  onIncrease={handleIncrease}
+                  onDecrease={handleDecrease}
+                />
               </Table.Td>
 
               <Table.Td ta="right">{formatCurrency(item.price)}</Table.Td>

@@ -19,9 +19,11 @@ const ResultCard: FC<ResultCardProps> = ({ title, text, isError, buttonConfig, .
 
   return (
     <Card withBorder {...rest}>
-      <Flex direction="column" align={'center'} gap={'md'}>
+      <Flex direction="column" align={'center'} gap={'md'} ta="center">
         <Title order={2}>{resultTitle}</Title>
-        <Text c={isError ? 'red' : 'dimmed'}>{resultText}</Text>
+        <Text c={isError ? 'red' : 'dimmed'} ta="center">
+          {resultText}
+        </Text>
         {buttonConfig && (
           <Button component={Link} to={buttonConfig.redirectPath} aria-label={buttonConfig.label}>
             {buttonConfig.label}

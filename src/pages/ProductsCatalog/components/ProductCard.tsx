@@ -39,7 +39,7 @@ interface ProductCardProps {
 
 const ProductCard: FC<ProductCardProps> = ({ id, name, price, image, inStock }) => {
   const { isMobile, isTablet } = useResponsive();
-  const cardHeight = isMobile ? 640 : isTablet ? 220 : 420;
+  const cardHeight = isMobile ? 540 : isTablet ? 320 : 420;
 
   return (
     <Card component={CardRoot} shadow="sm" padding="md" h="100%" withBorder>

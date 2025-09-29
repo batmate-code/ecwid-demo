@@ -25,8 +25,12 @@
   "checkoutEmailInputPlaceholder": "you@example.com",
   "checkoutPlaceOrderButtonLabelText": "Оформить заказ",
   "checkoutPlaceOrderButtonAriaLabel": "Оформить заказ",
-  "checkoutOrderSuccessText": "Заказ успешно оформлен 🎉",
+  "checkoutOrderSuccessText": "Заказ успешно размещен 🎉",
   "checkoutOrderSuccessItemsLabel": "Товары:",
   "checkoutBackToShopButtonLabelText": "Назад в магазин",
-  "checkoutBackToShopButtonAriaLabel": "Назад в магазин"
+  "checkoutBackToShopButtonAriaLabel": "Назад в магазин",
+  "notifyCartCleared": "Корзина пуста",
+  "notifyProductAdded": "Добавлено в корзину: {{name}}",
+  "notifyProductRemoved": "Удалено из корзины: {{name}}",
+  "notifyOrderPlaced": "Заказ успешно размещен!"
 }
