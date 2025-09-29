@@ -1,7 +1,7 @@
 import type { ProductDetails } from '@/api/apiTypes/shopApiTypes';
 import { AddToCartControl } from '@/components';
 import { sanitizeHtml } from '@/utils/htmlSanitizer';
-import { Badge, Box, Card, Group, Spoiler, Title, Text } from '@mantine/core';
+import { Badge, Box, Card, Group, Title, Text } from '@mantine/core';
 import { useMemo, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
