@@ -26,7 +26,7 @@ export const useResponsive = (): ResponsiveInfo => {
   else if (smallerThanLg) breakpoint = 'md';
   else if (smallerThanXl) breakpoint = 'lg';
 
-  const isMobile = !!smallerThanMd;
+  const isMobile = !!smallerThanSm;
   const isTablet = !smallerThanSm && !!smallerThanLg;
   const isDesktop = !smallerThanLg;
 

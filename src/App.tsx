@@ -3,12 +3,14 @@ import '@mantine/notifications/styles.css';
 import '@fontsource-variable/inter/index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Loader, localStorageColorSchemeManager, MantineProvider } from '@mantine/core';
+import { localStorageColorSchemeManager, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import RootLayout from './common/Layout/RootLayout';
 import ProductsCatalog from '@/pages/ProductsCatalog';
 import { GlobalStyles } from './style/globalStyle';
 import { lazy, Suspense } from 'react';
+import FullPageLoader from './common/FullPageLoader';
+import CartNotificationsBridge from './common/CartNotificationBridge';
 
 const queryClient = new QueryClient();
 const colorSchemeManager = localStorageColorSchemeManager({ key: 'ecwid-color-scheme' });
@@ -30,8 +32,9 @@ export default function App() {
           primaryColor: 'dark',
         }}
       >
-        <Notifications />
-        <Suspense fallback={<Loader />}>
+        <Notifications position="bottom-center" limit={3} />
+        <CartNotificationsBridge />
+        <Suspense fallback={<FullPageLoader />}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<RootLayout />}>

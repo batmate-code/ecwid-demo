@@ -10,8 +10,8 @@ interface CartViewProps {
 }
 
 const CartView: FC<CartViewProps> = ({ cartProducts, onCheckout }) => {
-  const { isTablet, isMobile } = useResponsive();
-  return isTablet || isMobile ? (
+  const { isMobile } = useResponsive();
+  return isMobile ? (
     <CartListMobile cartProducts={cartProducts} onCheckout={onCheckout} />
   ) : (
     <CartTableDesktop cartProducts={cartProducts} onCheckout={onCheckout} />

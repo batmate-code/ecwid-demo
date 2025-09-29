@@ -15,6 +15,7 @@ import type { CartItem } from '@/store/slices/cart';
 import { selectClearCart } from '@/store/selectors';
 import { useStore } from '@/store';
 import { useTranslation } from 'react-i18next';
+import { useNotify } from '@/hooks/useNotify';
 
 type CheckoutModalProps = {
   opened: boolean;
@@ -27,6 +28,7 @@ const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, 
   const [active, setActive] = useState(0);
   const [fakeLoading, setFakeLoading] = useState(false);
   const { t } = useTranslation('cart');
+  const notify = useNotify();
 
   const form = useForm({
     initialValues: { name: '', email: '' },
@@ -48,6 +50,7 @@ const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, 
     setTimeout(() => {
       setFakeLoading(false);
       setActive(1);
+      notify.success(t('notifyOrderPlaced'));
     }, 3000);
   });
 
