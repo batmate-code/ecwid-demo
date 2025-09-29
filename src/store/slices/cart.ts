@@ -17,7 +17,7 @@ export type CartSlice = {
 };
 
 const addProductAction = (state: StoreState, payload: CartItem) => {
-  const { id, name, price, amount, imageUrl } = payload; // amount может быть отрицательным (дельта)
+  const { id, name, price, amount, imageUrl } = payload;
   const existed = state.cart.products.find((i) => i.id === id);
 
   if (existed) {
