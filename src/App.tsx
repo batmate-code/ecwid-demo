@@ -8,15 +8,13 @@ import { Notifications } from '@mantine/notifications';
 import RootLayout from './common/Layout/RootLayout';
 import ProductsCatalog from '@/pages/ProductsCatalog';
 import { GlobalStyles } from './style/globalStyle';
-import { Suspense } from 'react';
-import ProductPage from './pages/ProductPage';
-import CartPage from './pages/CartPage';
+import { lazy, Suspense } from 'react';
 
 const queryClient = new QueryClient();
 const colorSchemeManager = localStorageColorSchemeManager({ key: 'ecwid-color-scheme' });
 
-// const ProductPage = lazy(() => import('@/pages/ProductPage'));
-// const CartPage = lazy(() => import('@/pages/CartPage'));
+const ProductPage = lazy(() => import('@/pages/ProductPage'));
+const CartPage = lazy(() => import('@/pages/CartPage'));
 
 export default function App() {
   return (
