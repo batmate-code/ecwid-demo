@@ -1,0 +1,15 @@
+{
+  "addToCartButtonText": "Add to cart",
+  "addToCartButtonTextOutOfStock": "Out of stock",
+  "decreaseProductButtonAriaLabel": "Decrease",
+  "increaseProductButtonAriaLabel": "Increase",
+  "backButtonText": "Back",
+  "backButtonAriaLabel": "Go back",
+  "languageToggleAriaLabel": "Change language",
+  "themeToggleAriaLabel": "Toggle color scheme",
+  "themeToggleTooltipLabelDark": "Switch to light",
+  "themeToggleTooltipLabelLight": "Switch to dark",
+  "searchInputPlaceholder": "Search...",
+  "resultCardDefaultTitle": "Something went wrong :(",
+  "resultCardDefaultText": "Please, try again"
+}

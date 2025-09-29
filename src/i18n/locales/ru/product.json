@@ -1,0 +1,7 @@
+{
+  "description": "Описание",
+  "showMoreExpanded": "Свернуть",
+  "showMoreCompact": "Развернуть",
+  "productInStock": "В наличии",
+  "productOutOfStock": "Нет в наличии"
+}

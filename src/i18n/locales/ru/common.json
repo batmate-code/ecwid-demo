@@ -1,0 +1,15 @@
+{
+  "addToCartButtonText": "Добавить в корзину",
+  "addToCartButtonTextOutOfStock": "Нет в наличии",
+  "decreaseProductButtonAriaLabel": "Добавить",
+  "increaseProductButtonAriaLabel": "Убрать",
+  "backButtonText": "Назад",
+  "backButtonAriaLabel": "Вернуться",
+  "languageToggleAriaLabel": "Смена языка",
+  "themeToggleAriaLabel": "Смена цветовой схемы",
+  "themeToggleTooltipLabelDark": "Сменить на светлую тему",
+  "themeToggleTooltipLabelLight": "Сменить на темную тему",
+  "searchInputPlaceholder": "Поиск...",
+  "resultCardDefaultTitle": "Что-то пошло не так :(",
+  "resultCardDefaultText": "Пожалуйста, попробуйте снова"
+}

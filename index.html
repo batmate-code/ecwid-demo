@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ecwid-test</title>
+    <meta
+      name="description"
+      content="Demo storefront built with React + Mantine for Ecwid interview"
+    />
+    <link rel="icon" href="/ecwid-demo.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+  </head>
+  <body>
+    <a href="#root" class="skip-link">Skip to content</a>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        padding: 8px 12px;
+        background: #fff;
+        color: #000;
+      }
+      .skip-link:focus {
+        left: 8px;
+        z-index: 1000;
+        border-radius: 6px;
+        outline: 2px solid #000;
+      }
+    </style>
+  </body>
+</html>

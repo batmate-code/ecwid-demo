@@ -1,0 +1,47 @@
+import DOMPurify from 'isomorphic-dompurify';
+
+export const sanitizeHtml = (html: string): string => {
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: [
+      'p',
+      'br',
+      'b',
+      'strong',
+      'i',
+      'em',
+      'u',
+      's',
+      'ul',
+      'ol',
+      'li',
+      'span',
+      'div',
+      'blockquote',
+      'code',
+      'pre',
+      'hr',
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'a',
+      'img',
+    ],
+    ALLOWED_ATTR: [
+      'href',
+      'title',
+      'target',
+      'rel',
+      'src',
+      'alt',
+      'width',
+      'height',
+      'class',
+      'id',
+    ],
+    ALLOW_ARIA_ATTR: false,
+    ALLOW_DATA_ATTR: false,
+  });
+};
