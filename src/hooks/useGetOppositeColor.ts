@@ -6,7 +6,7 @@ import { useMantineColorScheme } from '@mantine/core';
  */
 const useGetOppositeColor = () => {
   const { colorScheme } = useMantineColorScheme();
-  const color = colorScheme === Theme.Light ? 'dark' : 'gray';
+  const color = colorScheme === Theme.Dark ? 'gray' : 'dark';
 
   return { color };
 };

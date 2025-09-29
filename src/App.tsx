@@ -27,7 +27,6 @@ export default function App() {
         theme={{
           fontFamily:
             'Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-          defaultRadius: 'md',
           primaryColor: 'dark',
         }}
       >
