@@ -1,4 +1,3 @@
-import { Theme } from '@/components/ThemeToggle';
 import useGetOppositeColor from '@/hooks/useGetOppositeColor';
 import { useStore } from '@/store';
 import { selectAddProduct, selectCartTotal, selectRemoveProduct } from '@/store/selectors';
