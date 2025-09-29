@@ -16,7 +16,6 @@ A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 
 - [Project Structure](#project-structure)
 - [Architecture Notes](#architecture-notes)
 - [Code Quality](#code-quality)
-- [Roadmap](#roadmap)
 
 ---
 
@@ -205,10 +204,10 @@ src/
 
 <details>
 <summary><strong>Performance</strong></summary>
-- Used useMemo and useCallback hooks to prevent unnecessary re-renders.
+
+- Used useMemo and useCallback hooks to prevent unnecessary re-renders. 
 - Consider `React.lazy` for routes/heavy widgets; wrap with `<Suspense fallback={<Loader/>}>`.  
 - Configure Query caching (`staleTime`, etc.) in `queries/config.ts` to reduce refetching.
-
 </details>
 
 ---
