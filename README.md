@@ -1,188 +1,223 @@
-Ecwid Demo Storefront by Yuri Aralkin
+# Ecwid Demo Storefront
 
-A storefront demo app built for Ecwid test assignment with React 19, Vite 7, Mantine 8, TanStack Query 5, React Router 7, and Zustand 5.
+A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 7**, **Mantine 8**, **TanStack Query 5**, **React Router 7**, and **Zustand 5**.
 
-✅ Requirements
+> Author: **Yuri Aralkin**
 
-Node.js ≥ 18
+---
 
-npm ≥ 9 — or yarn
+## Table of Contents
 
-📚 Libraries & Why (key dependencies)
+- [Requirements](#requirements)
+- [Libraries & Why](#libraries--why)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Scripts](#scripts)
+- [Project Structure](#project-structure)
+- [Architecture Notes](#architecture-notes)
+- [Code Quality](#code-quality)
 
-React / React DOM — UI runtime.
+---
 
-Vite — fast dev server + build tool.
+## Requirements
 
-React Router v7 — client-side routing (/, /product/:id, /cart, /:categoryPath/\*).
+- **Node.js** ≥ 18
+- **npm** ≥ 9 (or yarn)
 
-Mantine (@mantine/core, @mantine/hooks, @mantine/notifications) — UI system, theming.
+---
 
-@fontsource-variable/inter — local Inter Variable font with font-display: swap.
+## Libraries & Why
 
-TanStack React Query v5 (@tanstack/react-query, @tanstack/react-query-devtools) — server state, caching, background refresh.
+- **React / React DOM** — UI runtime.
+- **Vite** — fast dev server + build tool.
+- **React Router v7** — client-side routing (`/`, `/product/:id`, `/cart`, `/:categoryPath/*`).
+- **Mantine** (`@mantine/core`, `@mantine/hooks`, `@mantine/notifications`) — UI system, theming, notifications.
+- **@fontsource-variable/inter** — Inter variable font (local), `font-display: swap`.
+- **TanStack React Query v5** (`@tanstack/react-query`, `@tanstack/react-query-devtools`) — server state, caching, background refresh.
+- **Zustand 5** — lightweight app state (cart slice).
+- **Axios** — HTTP client with a typed service layer.
+- **Zod** — runtime validation; configurable “guard mode” for API validation strategy.
+- **Immer** — helper for immutable updates (optional with Zustand/complex reducers).
+- **i18next / react-i18next / i18next-browser-languagedetector** — internationalization with auto language detection.
+- **styled-components** — scoped CSS-in-JS for a few highly customized widgets.
+- **@tabler/icons-react** — icon set.
+- **isomorphic-dompurify** — SSR/CSR-safe HTML sanitization.
+- **ESLint / Prettier / Husky / lint-staged** — code quality, formatting, pre-commit checks.
 
-Zustand 5 — lightweight app state (cart slice).
+---
 
-Axios — HTTP client, typed service layer.
+## Getting Started
 
-Zod — runtime validation; used with a configurable “guard mode” for API validation strategy.
-
-Immer — immutable updates (optional helper with Zustand or complex reducers).
-
-i18next / react-i18next / i18next-browser-languagedetector — internationalization with auto language detection.
-
-styled-components — for a few custom, highly styled widgets where CSS-in-JS is convenient.
-
-@tabler/icons-react — icon set for UI.
-
-isomorphic-dompurify — safe HTML sanitization (SSR/CSR-capable).
-
-ESLint / Prettier / Husky / lint-staged — code quality, formatting, pre-commit checks.
-
-🚀 Getting Started
-
+```bash
 # 1) Install dependencies
-
 npm install
 
-# 2) Create an .env from the example
-
+# 2) Create your .env from the example
 cp .env.example .env
 
 # 3) Run the dev server
-
 npm run start
 
-# 4) Production build & local preview
-
+# 4) Build & preview production bundle
 npm run build
 npm run preview
+```
 
-.env.example
+---
 
+## Environment Variables
+
+Create a `.env` file (you can copy from `.env.example`):
+
+```dotenv
 # API base URL (adjust or proxy in dev if needed)
-
 VITE_API_BASE_URL=http://localhost:5173/api
 
 # Color scheme key for Mantine localStorage manager
-
 VITE_COLOR_SCHEME_KEY=ecwid-color-scheme
 
-# Zod guard
-
+# Zod guard configuration
 VITE_ZOD_GUARD_ENABLED=true
-VITE_ZOD_GUARD_MODE=warn # one of: throw | warn | silent
+# one of: throw | warn | silent
+VITE_ZOD_GUARD_MODE=warn
+```
 
-🧯 Scripts
+---
 
-From your package.json:
+## Scripts
 
+From `package.json`:
+
+```json
 {
-"scripts": {
-"start": "vite", // dev server
-"build": "build": "tsc --noEmit && vite build", // type-check + production build
-"preview": "vite preview", // serve built assets
-"lint": "eslint .", // lint all sources
-"prepare": "husky" // install git hooks
+  "scripts": {
+    "start": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "prepare": "husky"
+  }
 }
-}
+```
 
-Pre-commit: husky + lint-staged will run ESLint/Prettier on staged files.
-(Ensure you ran git init before the first commit so Husky can install hooks.)
+- **start** — dev server
+- **build** — type-check + production build
+- **preview** — serve built assets locally
+- **lint** — run ESLint across the repo
+- **prepare** — installs Git hooks via Husky
 
-🧱 Project Structure (high level)
+> **Pre-commit:** Husky + lint-staged will run ESLint/Prettier on staged files.  
+> Ensure you’ve run `git init` so Husky can install hooks.
+
+---
+
+## Project Structure
+
+```
 src/
-api/ # API calls (getProductsList, getProduct, ...)
-apiTypes/ # API types (Product, Category, PagedResponse, etc.)
-services/ # axios instance, baseURL, interceptors
-common/
-Layout/ # shared layout with <Outlet/>
-components/ # reusable presentational components
-hooks/ # custom hooks
-pages/ # Root pages with inner hooks and components
-ProductsCatalog/  
- ProductPage/
-CartPage/
-queries/ # API queries hooks
-store/ # Store powered by zustand with slice pattern structure and selectors for usage
-slices/ # Store slices
-style/ # global styles
-locales/ # App translation
-i18n.ts # i18next setup
-App.tsx
-main.tsx
+  api/                    # API calls (getProductsList, getProduct, ...)
+    apiTypes/             # API types (Product, Category, PagedResponse, etc.)
+    services/             # axios instance, baseURL, interceptors
+  common/
+    Layout/               # shared layout with <Outlet/>
+  components/             # reusable presentational components
+  hooks/                  # custom hooks
+  i18n.ts                 # i18next setup
+    locales/              # i18n JSON resources
+  pages/                  # route-level pages
+    ProductsCatalog/
+    ProductPage/
+    CartPage/
+  queries/                # data-fetching hooks (TanStack Query)
+  store/                  # Zustand store (slice pattern) + selectors
+    slices/               # store slices
+  style/                  # global styles
+  types/                  # global typization
+  utils/                  # reusable utilities
+  zod/                    # zod validator configuration
+  App.tsx
+  main.tsx
+```
 
-🧭 Architecture Notes
+---
 
-UI & Theming:
+## Architecture Notes
 
-MantineProvider enables CSS variables and theme.
+<details>
+<summary><strong>UI & Theming</strong></summary>
 
-Font stack uses Inter Variable with robust system fallbacks.
+- `MantineProvider` enables CSS variables and theming.
+- Font stack uses **Inter Variable** with robust system fallbacks.
+- Color scheme persisted via `localStorageColorSchemeManager` (key from `VITE_COLOR_SCHEME_KEY`).
 
-Color scheme is persisted via localStorageColorSchemeManager with key from VITE_COLOR_SCHEME_KEY.
+</details>
 
-Data Fetching (Server State):
+<details>
+<summary><strong>Data Fetching (Server State)</strong></summary>
 
-TanStack Query v5 for fetching/cache/invalidation.
+- **TanStack Query v5** handles fetching, caching, and invalidation.
+- Each API call has a dedicated hook in `src/queries/*`.
+- Suspense is compatible (opt-in with `suspense: true` and `<Suspense>` boundaries).
 
-Each API call has a dedicated hook in src/queries/\*.
+</details>
 
-You can enable Suspense in Query if you choose (suspense: true) and wrap parts of the tree in <Suspense>.
+<details>
+<summary><strong>App State</strong></summary>
 
-App State:
+- **Zustand 5** for local app state (cart).
+- **Immer** can simplify immutable updates when needed.
 
-Zustand 5 for local app state (cart).
+</details>
 
-Immer is available to simplify immutable updates if needed.
+<details>
+<summary><strong>Validation</strong></summary>
 
-Validation:
+- **Zod** api validation with a configurable guard mode:
+  - `throw` — hard fail
+  - `warn` — console warn but continue
+  - `silent` — no output (perf/production)
 
-Zod-based validation with a configurable guard mode:
+</details>
 
-throw: hard fail
+<details>
+<summary><strong>i18n</strong></summary>
 
-warn: console warn but continue
+- **i18next** with language detector and namespaced JSON (`locales/{en,ru}`).
+- Default language and fallbacks configured in `i18n.ts`.
 
-silent: no output (for perf/production scenarios)
+</details>
 
-i18n:
+<details>
+<summary><strong>Styling</strong></summary>
 
-i18next with language detector and namespaced JSON resources in locales/{en,ru}.
+- **Mantine** for most UI.
+- **styled-components** for targeted, highly custom widgets.
 
-Default language & fallbacks set in i18n.ts.
+</details>
 
-Styling:
+<details>
+<summary><strong>Security</strong></summary>
 
-Mantine components for most UI.
+- **isomorphic-dompurify** to sanitize any API-provided HTML before rendering.
 
-styled-components for specialized widgets where scoped CSS-in-JS helps.
+</details>
 
-Security:
+<details>
+<summary><strong>Performance</strong></summary>
 
-isomorphic-dompurify to sanitize any HTML coming from the API before rendering.
+- Used useMemo and useCallback hooks to prevent unnecessary re-renders.
+- Consider `React.lazy` for routes/heavy widgets; wrap with `<Suspense fallback={<Loader/>}>`.
+- Configure Query caching (`staleTime`, etc.) in `queries/config.ts` to reduce refetching.
+</details>
 
-Performance:
+---
 
-Consider React.lazy for routes and heavy widgets; wrap with <Suspense fallback={<Loader/>}>.
+## Code Quality
 
-Use Query caching (staleTime) to avoid refetch storms; configure in queries/config.ts.
+- **ESLint** (incl. `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)
+- **Prettier** (incl. `prettier-plugin-packagejson`)
+- **Husky + lint-staged** to run ESLint/Prettier on staged files on commit
 
-🧹 Code Quality
+---
 
-ESLint with eslint-plugin-react-hooks and eslint-plugin-react-refresh.
-
-Prettier with prettier-plugin-packagejson.
-
-Husky + lint-staged:
-
-On commit, runs ESLint/Prettier only on staged files.
-
-🗺️ Roadmap (nice-to-haves)
-
-Add unit tests (Vitest) and component tests (Testing Library).
-
-Setup CI (lint + typecheck + build).
-
-Thanks for reviewing!
+_Thanks for reviewing!_
