@@ -67,7 +67,6 @@ const resolveTrailBySlugs = (slugs: string[], roots: CategoryNode[]) => {
 export const useCategoriesNavigation = (categories: Category[]): useCategoriesNavigationData => {
   const { buildUrl } = useBuildUrl();
   const navigate = useNavigate();
-
   const location = useLocation();
 
   const { roots } = useMemo(() => buildTreeAndIndex(categories), [categories]);

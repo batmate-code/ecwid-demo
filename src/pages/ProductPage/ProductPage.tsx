@@ -12,14 +12,13 @@ import { useTranslation } from 'react-i18next';
 
 const ProductPage: React.FC = () => {
   const { t } = useTranslation('product');
-
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isMobile, isTablet } = useResponsive();
-
   const { data: productDetails, isLoading, isError } = useGetProduct(id ?? '');
 
   const mainImageHeight = isMobile ? 520 : isTablet ? 640 : 700;
+
   const galleryImages = useMemo(() => getProductImages(productDetails), [productDetails]);
 
   if (isLoading) {
