@@ -1,4 +1,4 @@
-import BackButton from '@/components/BackButton';
+import { BackButton } from '@/components';
 import { Container, Grid, Group, Skeleton } from '@mantine/core';
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';

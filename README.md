@@ -21,7 +21,7 @@ A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 
 
 ## Requirements
 
-- **Node.js** ≥ 18  
+- **Node.js** ≥ 18
 - **npm** ≥ 9 (or yarn)
 
 ---
@@ -92,7 +92,7 @@ From `package.json`:
 {
   "scripts": {
     "start": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "prepare": "husky"
@@ -100,10 +100,10 @@ From `package.json`:
 }
 ```
 
-- **start** — dev server  
-- **build** — type-check + production build  
-- **preview** — serve built assets locally  
-- **lint** — run ESLint across the repo  
+- **start** — dev server
+- **build** — type-check + production build
+- **preview** — serve built assets locally
+- **lint** — run ESLint across the repo
 - **prepare** — installs Git hooks via Husky
 
 > **Pre-commit:** Husky + lint-staged will run ESLint/Prettier on staged files.  
@@ -146,8 +146,8 @@ src/
 <details>
 <summary><strong>UI & Theming</strong></summary>
 
-- `MantineProvider` enables CSS variables and theming.  
-- Font stack uses **Inter Variable** with robust system fallbacks.  
+- `MantineProvider` enables CSS variables and theming.
+- Font stack uses **Inter Variable** with robust system fallbacks.
 - Color scheme persisted via `localStorageColorSchemeManager` (key from `VITE_COLOR_SCHEME_KEY`).
 
 </details>
@@ -155,8 +155,8 @@ src/
 <details>
 <summary><strong>Data Fetching (Server State)</strong></summary>
 
-- **TanStack Query v5** handles fetching, caching, and invalidation.  
-- Each API call has a dedicated hook in `src/queries/*`.  
+- **TanStack Query v5** handles fetching, caching, and invalidation.
+- Each API call has a dedicated hook in `src/queries/*`.
 - Suspense is compatible (opt-in with `suspense: true` and `<Suspense>` boundaries).
 
 </details>
@@ -164,7 +164,7 @@ src/
 <details>
 <summary><strong>App State</strong></summary>
 
-- **Zustand 5** for local app state (cart).  
+- **Zustand 5** for local app state (cart).
 - **Immer** can simplify immutable updates when needed.
 
 </details>
@@ -173,8 +173,8 @@ src/
 <summary><strong>Validation</strong></summary>
 
 - **Zod** api validation with a configurable guard mode:
-  - `throw` — hard fail  
-  - `warn` — console warn but continue  
+  - `throw` — hard fail
+  - `warn` — console warn but continue
   - `silent` — no output (perf/production)
 
 </details>
@@ -182,7 +182,7 @@ src/
 <details>
 <summary><strong>i18n</strong></summary>
 
-- **i18next** with language detector and namespaced JSON (`locales/{en,ru}`).  
+- **i18next** with language detector and namespaced JSON (`locales/{en,ru}`).
 - Default language and fallbacks configured in `i18n.ts`.
 
 </details>
@@ -190,7 +190,7 @@ src/
 <details>
 <summary><strong>Styling</strong></summary>
 
-- **Mantine** for most UI.  
+- **Mantine** for most UI.
 - **styled-components** for targeted, highly custom widgets.
 
 </details>
@@ -205,8 +205,8 @@ src/
 <details>
 <summary><strong>Performance</strong></summary>
 
-- Used useMemo and useCallback hooks to prevent unnecessary re-renders. 
-- Consider `React.lazy` for routes/heavy widgets; wrap with `<Suspense fallback={<Loader/>}>`.  
+- Used useMemo and useCallback hooks to prevent unnecessary re-renders.
+- Consider `React.lazy` for routes/heavy widgets; wrap with `<Suspense fallback={<Loader/>}>`.
 - Configure Query caching (`staleTime`, etc.) in `queries/config.ts` to reduce refetching.
 </details>
 
@@ -214,8 +214,8 @@ src/
 
 ## Code Quality
 
-- **ESLint** (incl. `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)  
-- **Prettier** (incl. `prettier-plugin-packagejson`)  
+- **ESLint** (incl. `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)
+- **Prettier** (incl. `prettier-plugin-packagejson`)
 - **Husky + lint-staged** to run ESLint/Prettier on staged files on commit
 
 ---

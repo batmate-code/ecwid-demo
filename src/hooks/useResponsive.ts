@@ -1,8 +1,8 @@
+import type { BreakpointName } from '@/style/globalTypes';
 import { useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useMemo } from 'react';
 
-export type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ResponsiveInfo = {
   isMobile: boolean;
   isTablet: boolean;

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { useDebounce } from '@/hooks/useDebounce';
 import { ProductSortingPaths, type GetProductsParams } from '@/api/apiTypes/shopApiTypes';
 
 export interface ProductQueryParams {

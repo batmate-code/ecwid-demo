@@ -1,14 +1,10 @@
+import { Theme } from '@/style/globalTypes';
 import { ActionIcon, useMantineColorScheme, useComputedColorScheme, Tooltip } from '@mantine/core';
 import { IconSun, IconMoon } from '@tabler/icons-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ICON_SIZE = 22;
-
-export enum Theme {
-  Light = 'light',
-  Dark = 'dark',
-}
 
 const ThemeToggle: FC = () => {
   const { t } = useTranslation('common');
