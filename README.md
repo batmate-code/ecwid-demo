@@ -33,16 +33,16 @@ A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 
 - **Vite** - fast dev server + build tool.
 - **React Router v7** - client-side routing (`/`, `/product/:id`, `/cart`, `/:categoryPath/*`).
 - **Mantine** (`@mantine/core`, `@mantine/hooks`, `@mantine/notifications`) - UI system, theming, notifications.
-- **@fontsource-variable/inter** - Inter variable font (local), `font-display: swap`.
 - **TanStack React Query v5** (`@tanstack/react-query`, `@tanstack/react-query-devtools`) - server state, caching, background refresh.
-- **Zustand 5** - lightweight app state (cart slice).
+- **Zustand 5** - lightweight app state with simple access to local storage managed by slice pattern.
 - **Axios** - HTTP client with a typed service layer.
 - **Zod** - runtime validation; configurable “guard mode” for API validation strategy.
 - **Immer** - helper for immutable updates (optional with Zustand/complex reducers).
 - **i18next / react-i18next / i18next-browser-languagedetector** - internationalization with auto language detection.
-- **styled-components** - scoped CSS-in-JS for a few highly customized widgets.
+- **styled-components** - scoped CSS-in-JS for a style customization.
+- **@fontsource-variable/inter** - Inter variable font (local).
 - **@tabler/icons-react** - icon set.
-- **isomorphic-dompurify** - SSR/CSR-safe HTML sanitization.
+- **isomorphic-dompurify** - Safe HTML sanitization.
 - **ESLint / Prettier / Husky / lint-staged** - code quality, formatting, pre-commit checks.
 - **Vitest** - testing library.
 
@@ -72,11 +72,11 @@ npm run preview
 Create a `.env` file (you can copy from `.env.example`):
 
 ```dotenv
-# API base URL (adjust or proxy in dev if needed)
-VITE_API_BASE_URL=http://localhost:5173/api
+# API connection ID key
+VITE_ECWID_STORE_ID=777777777777
 
-# Color scheme key for Mantine localStorage manager
-VITE_COLOR_SCHEME_KEY=ecwid-color-scheme
+# API connection token
+VITE_ECWID_PUBLIC_TOKEN=public_tokentokentokentokentokentokentokentoken
 
 # Zod guard configuration
 VITE_ZOD_GUARD_ENABLED=true
@@ -111,18 +111,19 @@ From `package.json`:
 > **Pre-commit:** Husky + lint-staged will run ESLint/Prettier on staged files.  
 > Ensure you’ve run `git init` so Husky can install hooks.
 
+> **Github-CI:** pipelines are set to launch tests and lints on PR creation or push to Dev\Master branches.
 ---
 
 ## Project Structure
 
 ```
 src/
-  api/                    # API calls (getProductsList, getProduct, ...)
-    apiTypes/             # API types (Product, Category, PagedResponse, etc.)
+  api/                    # API calls
+    apiTypes/             # API types
     services/             # axios instance, baseURL, interceptors
   common/
-    Layout/               # shared layout with <Outlet/>
-  components/             # reusable presentational components
+    Layout/               # shared layout
+  components/             # reusable components
   hooks/                  # custom hooks
   i18n.ts                 # i18next setup
     locales/              # i18n JSON resources
@@ -150,8 +151,7 @@ src/
 <summary><strong>UI & Theming</strong></summary>
 
 - `MantineProvider` enables CSS variables and theming.
-- Font stack uses **Inter Variable** with robust system fallbacks.
-- Color scheme persisted via `localStorageColorSchemeManager` (key from `VITE_COLOR_SCHEME_KEY`).
+- Color scheme persisted via `localStorageColorSchemeManager`
 
 </details>
 
@@ -160,14 +160,13 @@ src/
 
 - **TanStack Query v5** handles fetching, caching, and invalidation.
 - Each API call has a dedicated hook in `src/queries/*`.
-- Suspense is compatible (opt-in with `suspense: true` and `<Suspense>` boundaries).
 
 </details>
 
 <details>
 <summary><strong>App State</strong></summary>
 
-- **Zustand 5** for local app state (cart).
+- **Zustand 5** for local app (cart).
 - **Immer** can simplify immutable updates when needed.
 
 </details>
@@ -193,7 +192,7 @@ src/
 <details>
 <summary><strong>Styling</strong></summary>
 
-- **Mantine** for most UI.
+- **Mantine** for most UI components.
 - **styled-components** for targeted, highly custom widgets.
 
 </details>
@@ -217,7 +216,6 @@ src/
 ## Testing
 
 **Stack**: Vitest + @testing-library/react + @testing-library/user-event + JSDOM.
-Global setup lives in tests/setup.ts, and a shared render wrapper is in tests/queryWrapper.tsx
 
 What’s covered with unit tests:
 - **utils/**
@@ -234,7 +232,7 @@ What’s covered with unit tests:
 - **ESLint** (incl. `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)
 - **Prettier** (incl. `prettier-plugin-packagejson`)
 - **Husky + lint-staged** to run ESLint/Prettier on staged files on commit
-
+- **Github CI** to run tests with pipelanes
 ---
 
 
