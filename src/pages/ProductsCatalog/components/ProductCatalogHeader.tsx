@@ -12,7 +12,7 @@ interface CatalogHeaderProps {
 }
 
 const CatalogHeader: FC<CatalogHeaderProps> = ({ homeHref, crumbs }) => {
-  const { color: anchorColor } = useGetOppositeColor();
+  const { textColor: anchorColor } = useGetOppositeColor();
   const { t } = useTranslation('catalog');
 
   return (

@@ -23,11 +23,13 @@ const CartPage: FC = () => {
     return <EmptyCartScreen />;
   }
 
-  const handleBackToShop = () => {
+  const redirectBackToShop = () => {
     navigate('/');
     setCheckoutOpen(false);
-    clearCart();
+    clearCart({ silent: true });
   };
+
+  const handleClearCart = () => clearCart();
 
   return (
     <Container size="lg">
@@ -40,7 +42,7 @@ const CartPage: FC = () => {
           <Button
             color="red"
             variant="light"
-            onClick={() => clearCart()}
+            onClick={handleClearCart}
             aria-label={t('clearCartButtonAriaLabel')}
           >
             {t('clearCartButtonText')}
@@ -52,7 +54,7 @@ const CartPage: FC = () => {
         opened={checkoutOpen}
         onClose={() => setCheckoutOpen(false)}
         cartProducts={cartProducts}
-        onBackToShop={handleBackToShop}
+        onBackToShop={redirectBackToShop}
       />
     </Container>
   );

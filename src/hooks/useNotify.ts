@@ -1,5 +1,6 @@
 import { notifications } from '@mantine/notifications';
 
+/** Hook for handle triggering Mantine notifications from UI components  */
 export const useNotify = () => {
   return {
     success: (message: string, title = 'Success') =>

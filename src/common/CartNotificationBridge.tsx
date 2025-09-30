@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { useStore } from '@/store';
 import { notifications } from '@mantine/notifications';
 import { useTranslation } from 'react-i18next';
+import { selectConsumeSilenceOnce } from '@/store/selectors';
 
 export const CartNotificationsBridge = () => {
   const { t } = useTranslation('cart');
+  const consumeSilenceOnce = useStore(selectConsumeSilenceOnce);
 
   useEffect(() => {
     const unsubscribe = useStore.subscribe((state, prev) => {
+      if (consumeSilenceOnce()) return;
+
       const products = state.cart.products;
       const prevProducts = prev.cart.products;
 
@@ -17,14 +21,6 @@ export const CartNotificationsBridge = () => {
       const removed = prevProducts.filter(
         (prevProduct) => !products.some((product) => product.id === prevProduct.id),
       );
-
-      if (prevProducts.length > 0 && products.length === 0) {
-        notifications.show({
-          color: 'red',
-          message: t('notifyCartCleared'),
-        });
-        return;
-      }
 
       added.forEach((p) =>
         notifications.show({
@@ -46,7 +42,7 @@ export const CartNotificationsBridge = () => {
     });
 
     return unsubscribe;
-  }, [t]);
+  }, [consumeSilenceOnce, t]);
 
   return null;
 };

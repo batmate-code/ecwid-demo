@@ -29,7 +29,6 @@
   "checkoutOrderSuccessItemsLabel": "Items:",
   "checkoutBackToShopButtonLabelText": "Back to shop",
   "checkoutBackToShopButtonAriaLabel": "Back to shop",
-  "notifyCartCleared": "Cart is empty",
   "notifyProductAdded": "Added: {{name}}",
   "notifyProductRemoved": "Removed: {{name}}",
   "notifyOrderPlaced": "Order placed successfully!"
