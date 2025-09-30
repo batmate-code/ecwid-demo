@@ -1,5 +1,5 @@
 import { useStore } from '@/store';
-import { CartItem } from '../slices/cart';
+import { CartItem } from '@/store/slices/cart';
 
 const sample = (over: Partial<CartItem> = {}) => ({
   id: 1,

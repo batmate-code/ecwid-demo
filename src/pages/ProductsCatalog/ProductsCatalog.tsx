@@ -104,14 +104,14 @@ const ProductsCatalog: FC = () => {
         <Grid.Col span="auto">
           <Box>
             {isProductsLoading ? (
-              <Center>
+              <Center data-testid="catalog-loader">
                 <Loader />
               </Center>
             ) : isProductsError ? (
-              <ResultCard text={t('productsFetchError')} isError />
+              <ResultCard testId="error-products-result" text={t('productsFetchError')} isError />
             ) : (
               <>
-                <ProductsGrid showEmpty>
+                <ProductsGrid showEmpty={!products.length}>
                   {products.map((product) => (
                     <ProductCard
                       key={product.id}

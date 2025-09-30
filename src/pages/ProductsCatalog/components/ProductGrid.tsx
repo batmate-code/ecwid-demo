@@ -17,7 +17,11 @@ const ProductsGrid: FC<ProductsGridProps> = ({
   const hasChildren = Array.isArray(children) ? children.length > 0 : !!children;
   if (!hasChildren && showEmpty) {
     return (
-      <ResultCard title={t('productsNotFoundError')} text={t('productsNotFoundErrorDescription')} />
+      <ResultCard
+        title={t('productsNotFoundError')}
+        text={t('productsNotFoundErrorDescription')}
+        testId="empty-products-result"
+      />
     );
   }
   return <SimpleGrid cols={cols}>{children}</SimpleGrid>;

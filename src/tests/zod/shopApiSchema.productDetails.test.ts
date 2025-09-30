@@ -1,4 +1,4 @@
-import { ProductDetailsSchema } from '../schemas/shopApiSchema';
+import { ProductDetailsSchema } from '@/zod/schemas/shopApiSchema';
 
 describe('ProductDetailsSchema', () => {
   it('accepts valid product details', () => {

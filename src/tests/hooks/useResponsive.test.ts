@@ -17,9 +17,9 @@ vi.mock('@mantine/hooks', () => ({
   useMediaQuery: () => useMediaQueryMock(),
 }));
 
-function setSmallerThan(sm: boolean, md: boolean, lg: boolean, xl: boolean) {
+const setSmallerThan = (sm: boolean, md: boolean, lg: boolean, xl: boolean) => {
   nextResults = [sm, md, lg, xl];
-}
+};
 
 describe('useResponsive', () => {
   beforeEach(() => {

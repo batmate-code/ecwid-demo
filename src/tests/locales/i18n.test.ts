@@ -1,12 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import en_common from '../locales/en/common.json';
-import ru_common from '../locales/ru/common.json';
+import en_common from '../../i18n/locales/en/common.json';
+import ru_common from '../../i18n/locales/ru/common.json';
 
 const STORAGE_KEY = 'ecwid-lang';
 
 const freshI18nImport = async () => {
   vi.resetModules();
-  const mod = await import('../i18n');
+  const mod = await import('../../i18n/i18n');
   return mod.default;
 };
 
