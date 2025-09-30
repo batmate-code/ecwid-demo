@@ -11,11 +11,11 @@ import {
   Divider,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import type { CartItem } from 'store/slices/cart';
-import { selectClearCart } from 'store/selectors';
-import { useStore } from 'store';
+import type { CartItem } from '@/store/slices/cart';
+import { selectClearCart } from '@/store/selectors';
+import { useStore } from '@/store';
 import { useTranslation } from 'react-i18next';
-import { useNotify } from 'hooks/useNotify';
+import { useNotify } from '@/hooks/useNotify';
 
 type CheckoutModalProps = {
   opened: boolean;

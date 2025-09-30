@@ -13,10 +13,10 @@ import {
 } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
-import { useStore } from 'store';
-import { selectAddProduct, selectCartTotal, selectRemoveProduct } from 'store/selectors';
-import type { CartItem } from 'store/slices/cart';
-import { formatCurrency } from 'utils';
+import { useStore } from '@/store';
+import { selectAddProduct, selectCartTotal, selectRemoveProduct } from '@/store/selectors';
+import type { CartItem } from '@/store/slices/cart';
+import { formatCurrency } from '@/utils';
 import { useTranslation } from 'react-i18next';
 import CartItemController from './CartItemController';
 

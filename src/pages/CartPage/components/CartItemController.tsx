@@ -1,4 +1,4 @@
-import type { CartItem } from 'store/slices/cart';
+import type { CartItem } from '@/store/slices/cart';
 import { Group, ActionIcon, Text } from '@mantine/core';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
 import type { FC } from 'react';

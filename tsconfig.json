@@ -9,21 +9,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-      // "@store": ["src/store/index.ts"],
-      // "@utils": ["src/utils/index.ts"],
-      // "@style/*": ["src/style/*"],
-      // "@components": ["src/components/index.ts"],
-      // "@store/*": ["src/store/*"],
-      // "@pages/*": ["src/pages/*"],
-      // "@queries": ["src/queries/index.ts"],
-      // "@queries/*": ["src/queries/*"],
-      // "@api/*": ["src/api/*"],
-      // "@hooks/*": ["src/hooks/*"],
-      // "@zod/*": ["src/zod/*"]
     },
 
     "types": ["vite/client", "node"],
-
     "strict": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
