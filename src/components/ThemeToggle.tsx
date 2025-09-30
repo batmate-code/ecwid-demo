@@ -8,9 +8,9 @@ const ICON_SIZE = 22;
 
 const ThemeToggle: FC = () => {
   const { t } = useTranslation('common');
-
   const { setColorScheme } = useMantineColorScheme();
   const computed = useComputedColorScheme(Theme.Light, { getInitialValueInEffect: true });
+
   const isLightTheme = computed === Theme.Light;
   const nextColorScheme = isLightTheme ? Theme.Dark : Theme.Light;
   const tooltipLabel = isLightTheme

@@ -11,7 +11,6 @@ import CheckoutModal from './components/CheckoutModal';
 
 const CartPage: FC = () => {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-
   const navigate = useNavigate();
   const { t } = useTranslation('cart');
 

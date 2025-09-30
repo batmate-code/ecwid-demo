@@ -21,19 +21,18 @@ import { useDisclosure } from '@mantine/hooks';
 const PAGE_SIZE = 6;
 
 const ProductsCatalog: FC = () => {
-  const [mobileFilterOpened, { open: openMobileFilter, close: closeMobileFilter }] =
-    useDisclosure(false);
-
   const { t } = useTranslation('catalog');
   const { isMobile, isTablet } = useResponsive();
   const { query, sort, page, priceFrom, priceTo, setParams } = useCatalogUrlState();
+  const { buildUrl } = useBuildUrl();
+  const [mobileFilterOpened, { open: openMobileFilter, close: closeMobileFilter }] =
+    useDisclosure(false);
+
   const {
     data: categories = [],
     isLoading: isCategoriesLoading,
     isError: isCategoriesError,
   } = useGetCategoriesList();
-
-  const { buildUrl } = useBuildUrl();
 
   const { breadcrumbItems, visibleCategories, currentCategoryId, backHref } =
     useCategoriesNavigation(categories);
