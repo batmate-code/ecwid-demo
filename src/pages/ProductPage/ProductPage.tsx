@@ -5,12 +5,14 @@ import ProductGallery from './components/ProductGallery';
 import { getProductImages } from './utils';
 import { useMemo } from 'react';
 import ProductPageSkeleton from './components/ProductPageSkeleton';
-import ProductPageErrorScreen from './components/ProductPageErrorScreen';
 import ProductInfo from './components/ProductInfo';
-import { BackButton } from '@/components';
+import { BackButton, ResultCard } from '@/components';
 import { useResponsive } from '@/hooks/useResponsive';
+import { useTranslation } from 'react-i18next';
 
 const ProductPage: React.FC = () => {
+  const { t } = useTranslation('product');
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isMobile, isTablet } = useResponsive();
@@ -25,7 +27,17 @@ const ProductPage: React.FC = () => {
   }
 
   if (isError || !productDetails) {
-    return <ProductPageErrorScreen />;
+    return (
+      <ResultCard
+        title={t('errorScreenTitle')}
+        text={t('errorScreenDesc')}
+        buttonConfig={{
+          label: t('errorButtonTitle'),
+          redirectPath: '/',
+        }}
+        isError
+      />
+    );
   }
 
   return (

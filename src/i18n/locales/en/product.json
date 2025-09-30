@@ -3,5 +3,8 @@
   "showMoreExpanded": "Hide",
   "showMoreCompact": "Show more",
   "productInStock": "In stock",
-  "productOutOfStock": "Out of stock"
+  "productOutOfStock": "Out of stock",
+  "errorScreenTitle": "Product not found",
+  "errorScreenDesc": "We couldn’t load this product. Try again or go back to the catalog.",
+  "errorButtonTitle": "Go to catalog"
 }

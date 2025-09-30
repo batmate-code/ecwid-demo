@@ -8,14 +8,14 @@ import {
   Stack,
   Title,
   List,
+  Text,
   Divider,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import type { CartItem } from '@/store/slices/cart';
-import { selectClearCart } from '@/store/selectors';
-import { useStore } from '@/store';
 import { useTranslation } from 'react-i18next';
 import { useNotify } from '@/hooks/useNotify';
+import { useResponsive } from '@/hooks/useResponsive';
 
 type CheckoutModalProps = {
   opened: boolean;
@@ -25,10 +25,11 @@ type CheckoutModalProps = {
 };
 
 const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, onBackToShop }) => {
-  const [active, setActive] = useState(0);
+  const [currentState, setCurrentState] = useState(0);
   const [fakeLoading, setFakeLoading] = useState(false);
   const { t } = useTranslation('cart');
   const notify = useNotify();
+  const { isMobile } = useResponsive();
 
   const form = useForm({
     initialValues: { name: '', email: '' },
@@ -43,21 +44,19 @@ const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, 
     },
   });
 
-  const clearCart = useStore(selectClearCart);
-
   const handleSubmit = form.onSubmit(() => {
     setFakeLoading(true);
     setTimeout(() => {
       setFakeLoading(false);
-      setActive(1);
+      setCurrentState(1);
       notify.success(t('notifyOrderPlaced'));
     }, 3000);
   });
 
   const onCloseModified = () => {
-    if (active === 1) {
+    if (currentState === 1) {
       onClose();
-      clearCart();
+      onBackToShop();
     } else {
       onClose();
     }
@@ -73,17 +72,19 @@ const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, 
       closeButtonProps={{ disabled: fakeLoading }}
     >
       <Stepper
-        active={active}
-        onStepClick={setActive}
+        active={currentState + 1}
+        onStepClick={setCurrentState}
         allowNextStepsSelect={false}
         size="sm"
         mb="md"
+        contentPadding={'xs'}
+        orientation={isMobile ? 'vertical' : 'horizontal'}
       >
-        <Stepper.Step label={t('checkoutStepDetailsTitle')} />
-        <Stepper.Step label={t('checkoutStepSuccessTitle')} />
+        <Stepper.Step label={<Text>{t('checkoutStepDetailsTitle')}</Text>} />
+        <Stepper.Step label={<Text>{t('checkoutStepSuccessTitle')}</Text>} />
       </Stepper>
 
-      {active === 0 && (
+      {currentState === 0 && (
         <form onSubmit={handleSubmit}>
           <Stack gap="sm">
             <TextInput
@@ -112,7 +113,7 @@ const CheckoutModal: FC<CheckoutModalProps> = ({ opened, onClose, cartProducts, 
         </form>
       )}
 
-      {active === 1 && (
+      {currentState === 1 && (
         <Stack gap="sm">
           <Title order={4}>{t('checkoutOrderSuccessText')}</Title>
           <Divider />
