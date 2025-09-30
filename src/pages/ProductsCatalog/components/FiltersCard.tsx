@@ -1,6 +1,6 @@
 import type { ProductSortingPaths } from '@/api/apiTypes/shopApiTypes';
 import { Button, Card, Flex, RangeSlider, Select, Title, Text, ActionIcon } from '@mantine/core';
-import { useCallback, useEffect, useMemo, useState, type FC } from 'react';
+import { useMemo, useState, type FC } from 'react';
 import { getSortingDropdownOptions } from '../utils';
 import { useCatalogUrlState } from '@/pages/ProductsCatalog/hooks/useCatalogUrlState';
 import { IconReload } from '@tabler/icons-react';
@@ -26,19 +26,15 @@ const FiltersCard: FC<FiltersCardProps> = ({ onCloseMobileFilter }) => {
     if (onCloseMobileFilter) onCloseMobileFilter();
   };
 
-  const setDefaultState = useCallback(() => {
+  const setDefaultState = () => {
     setSortPath(sort);
     setPriceRange([priceFrom, priceTo]);
-  }, [setSortPath, setPriceRange]);
+  };
 
   const handleResetFilters = () => {
     setDefaultState();
     resetFilters();
   };
-
-  useEffect(() => {
-    setDefaultState();
-  }, [sort, priceFrom, priceTo, setDefaultState]);
 
   return (
     <Card padding="lg" radius="md" withBorder mt={'xs'}>

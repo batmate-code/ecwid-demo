@@ -1,13 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-
 import en_common from './locales/en/common.json';
 import en_layout from './locales/en/layout.json';
 import en_catalog from './locales/en/catalog.json';
 import en_cart from './locales/en/cart.json';
 import en_product from './locales/en/product.json';
-
 import ru_common from './locales/ru/common.json';
 import ru_layout from './locales/ru/layout.json';
 import ru_catalog from './locales/ru/catalog.json';
@@ -45,7 +43,7 @@ i18n
     detection: {
       order: ['localStorage', 'navigator'],
       lookupLocalStorage: STORAGE_KEY,
-      caches: ['localStorage'], // автоматически кэшировать найденный язык
+      caches: ['localStorage'],
     },
 
     interpolation: { escapeValue: false },
@@ -56,7 +54,9 @@ i18n
 i18n.on('languageChanged', (lng) => {
   try {
     localStorage.setItem(STORAGE_KEY, lng);
-  } catch {}
+  } catch {
+    return;
+  }
 });
 
 export default i18n;

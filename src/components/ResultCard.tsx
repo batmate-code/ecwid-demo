@@ -11,14 +11,22 @@ interface ResultCardProps extends CardProps {
     label: string;
     redirectPath: string;
   };
+  testId?: string;
 }
-const ResultCard: FC<ResultCardProps> = ({ title, text, isError, buttonConfig, ...rest }) => {
+const ResultCard: FC<ResultCardProps> = ({
+  title,
+  text,
+  isError,
+  buttonConfig,
+  testId,
+  ...rest
+}) => {
   const { t } = useTranslation('common');
   const resultTitle = title ?? t('resultCardDefaultTitle');
   const resultText = text ?? t('resultCardDefaultText');
 
   return (
-    <Card withBorder {...rest}>
+    <Card withBorder {...rest} data-testid={testId}>
       <Flex direction="column" align={'center'} gap={'md'} ta="center">
         <Title order={2}>{resultTitle}</Title>
         <Text c={isError ? 'red' : 'dimmed'} ta="center">
