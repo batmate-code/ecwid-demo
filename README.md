@@ -1,6 +1,6 @@
-# Ecwid Demo Storefront
+# Ecwid Demo app
 
-A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 7**, **Mantine 8**, **TanStack Query 5**, **React Router 7**, and **Zustand 5**.
+A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 7**, **Mantine 8**, **TanStack Query 5**, **React Router 7**, **Vitest 3**, and **Zustand 5**.
 
 > Author: **Yuri Aralkin**
 
@@ -15,6 +15,7 @@ A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 
 - [Scripts](#scripts)
 - [Project Structure](#project-structure)
 - [Architecture Notes](#architecture-notes)
+- [Testing](#testing)
 - [Code Quality](#code-quality)
 
 ---
@@ -28,21 +29,22 @@ A demo storefront built for an Ecwid test assignment using **React 19**, **Vite 
 
 ## Libraries & Why
 
-- **React / React DOM** — UI runtime.
-- **Vite** — fast dev server + build tool.
-- **React Router v7** — client-side routing (`/`, `/product/:id`, `/cart`, `/:categoryPath/*`).
-- **Mantine** (`@mantine/core`, `@mantine/hooks`, `@mantine/notifications`) — UI system, theming, notifications.
-- **@fontsource-variable/inter** — Inter variable font (local), `font-display: swap`.
-- **TanStack React Query v5** (`@tanstack/react-query`, `@tanstack/react-query-devtools`) — server state, caching, background refresh.
-- **Zustand 5** — lightweight app state (cart slice).
-- **Axios** — HTTP client with a typed service layer.
-- **Zod** — runtime validation; configurable “guard mode” for API validation strategy.
-- **Immer** — helper for immutable updates (optional with Zustand/complex reducers).
-- **i18next / react-i18next / i18next-browser-languagedetector** — internationalization with auto language detection.
-- **styled-components** — scoped CSS-in-JS for a few highly customized widgets.
-- **@tabler/icons-react** — icon set.
-- **isomorphic-dompurify** — SSR/CSR-safe HTML sanitization.
-- **ESLint / Prettier / Husky / lint-staged** — code quality, formatting, pre-commit checks.
+- **React / React DOM** - UI runtime.
+- **Vite** - fast dev server + build tool.
+- **React Router v7** - client-side routing (`/`, `/product/:id`, `/cart`, `/:categoryPath/*`).
+- **Mantine** (`@mantine/core`, `@mantine/hooks`, `@mantine/notifications`) - UI system, theming, notifications.
+- **@fontsource-variable/inter** - Inter variable font (local), `font-display: swap`.
+- **TanStack React Query v5** (`@tanstack/react-query`, `@tanstack/react-query-devtools`) - server state, caching, background refresh.
+- **Zustand 5** - lightweight app state (cart slice).
+- **Axios** - HTTP client with a typed service layer.
+- **Zod** - runtime validation; configurable “guard mode” for API validation strategy.
+- **Immer** - helper for immutable updates (optional with Zustand/complex reducers).
+- **i18next / react-i18next / i18next-browser-languagedetector** - internationalization with auto language detection.
+- **styled-components** - scoped CSS-in-JS for a few highly customized widgets.
+- **@tabler/icons-react** - icon set.
+- **isomorphic-dompurify** - SSR/CSR-safe HTML sanitization.
+- **ESLint / Prettier / Husky / lint-staged** - code quality, formatting, pre-commit checks.
+- **Vitest** - testing library.
 
 ---
 
@@ -95,16 +97,16 @@ From `package.json`:
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preview": "vite preview",
+    "start": "vite",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=default",
+    "test:cov": "vitest --coverage",
+    "test:ui": "vitest --ui"
   }
 }
 ```
-
-- **start** — dev server
-- **build** — type-check + production build
-- **preview** — serve built assets locally
-- **lint** — run ESLint across the repo
-- **prepare** — installs Git hooks via Husky
 
 > **Pre-commit:** Husky + lint-staged will run ESLint/Prettier on staged files.  
 > Ensure you’ve run `git init` so Husky can install hooks.
@@ -135,6 +137,7 @@ src/
   types/                  # global typization
   utils/                  # reusable utilities
   zod/                    # zod validator configuration
+  tests/                   # Vitest unit tests
   App.tsx
   main.tsx
 ```
@@ -173,9 +176,9 @@ src/
 <summary><strong>Validation</strong></summary>
 
 - **Zod** api validation with a configurable guard mode:
-  - `throw` — hard fail
-  - `warn` — console warn but continue
-  - `silent` — no output (perf/production)
+  - `throw` - hard fail
+  - `warn` - console warn but continue
+  - `silent` - no output (perf/production)
 
 </details>
 
@@ -211,6 +214,20 @@ src/
 </details>
 
 ---
+## Testing
+
+**Stack**: Vitest + @testing-library/react + @testing-library/user-event + JSDOM.
+Global setup lives in tests/setup.ts, and a shared render wrapper is in tests/queryWrapper.tsx
+
+What’s covered with unit tests:
+- **utils/**
+- **hooks/**
+- **store/**
+- **services/**
+- **queries/**
+- **zod/**
+
+---
 
 ## Code Quality
 
@@ -219,5 +236,6 @@ src/
 - **Husky + lint-staged** to run ESLint/Prettier on staged files on commit
 
 ---
+
 
 _Thanks for reviewing!_
