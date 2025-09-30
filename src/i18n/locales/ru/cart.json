@@ -29,7 +29,6 @@
   "checkoutOrderSuccessItemsLabel": "Товары:",
   "checkoutBackToShopButtonLabelText": "Назад в магазин",
   "checkoutBackToShopButtonAriaLabel": "Назад в магазин",
-  "notifyCartCleared": "Корзина пуста",
   "notifyProductAdded": "Добавлено в корзину: {{name}}",
   "notifyProductRemoved": "Удалено из корзины: {{name}}",
   "notifyOrderPlaced": "Заказ успешно размещен!"

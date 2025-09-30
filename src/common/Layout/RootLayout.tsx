@@ -11,7 +11,7 @@ import useGetOppositeColor from '@/hooks/useGetOppositeColor';
 const RootLayout: FC = () => {
   const count = useStore(selectCartCount);
   const { t } = useTranslation('layout');
-  const { color: anchorColor } = useGetOppositeColor();
+  const { textColor: anchorColor } = useGetOppositeColor();
 
   return (
     <AppShell header={{ height: 56 }} padding="md">

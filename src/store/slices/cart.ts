@@ -11,9 +11,12 @@ export type CartItem = {
 
 export type CartSlice = {
   products: CartItem[];
+  __notifySilentOnce: boolean;
+
   addProduct: (item: CartItem) => void;
   removeProduct: (id: number) => void;
-  clearCart: () => void;
+  clearCart: (options?: { silent?: boolean }) => void;
+  consumeSilenceOnce: () => boolean;
 };
 
 const addProductAction = (state: StoreState, payload: CartItem) => {
@@ -46,18 +49,34 @@ export const createCartSlice: StateCreator<
   [['zustand/devtools', never], ['zustand/persist', unknown], ['zustand/immer', never]],
   [],
   CartSlice
-> = (set) => ({
-  products: [],
-  addProduct: (newProduct) =>
-    set((state) => {
-      addProductAction(state, newProduct);
-    }),
-  removeProduct: (productId) =>
-    set((state) => {
-      removeProductAction(state, productId);
-    }),
-  clearCart: () =>
-    set((state) => {
-      clearCartAction(state);
-    }),
-});
+> = (set) => {
+  const silenceRef = { current: false };
+
+  return {
+    products: [],
+    __notifySilentOnce: false,
+
+    addProduct: (newProduct) =>
+      set((state) => {
+        addProductAction(state, newProduct);
+      }),
+
+    removeProduct: (productId) =>
+      set((state) => {
+        removeProductAction(state, productId);
+      }),
+
+    clearCart: (opts) =>
+      set((state) => {
+        const silent = opts?.silent ?? false;
+        if (silent) silenceRef.current = true;
+        clearCartAction(state);
+      }),
+
+    consumeSilenceOnce: () => {
+      const prevSilence = silenceRef.current;
+      if (prevSilence) silenceRef.current = false;
+      return prevSilence;
+    },
+  };
+};

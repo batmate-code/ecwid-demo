@@ -13,3 +13,5 @@ export const selectCartCount = (s: StoreState) =>
 
 export const selectCartTotal = (s: StoreState) =>
   s.cart.products.reduce((acc, product) => acc + product.price * product.amount, 0);
+
+export const selectConsumeSilenceOnce = (s: StoreState) => s.cart.consumeSilenceOnce;

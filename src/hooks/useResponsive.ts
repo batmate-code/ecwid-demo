@@ -1,5 +1,6 @@
 import { useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useMemo } from 'react';
 
 export type BreakpointName = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ResponsiveInfo = {
@@ -26,9 +27,10 @@ export const useResponsive = (): ResponsiveInfo => {
   else if (smallerThanLg) breakpoint = 'md';
   else if (smallerThanXl) breakpoint = 'lg';
 
-  const isMobile = !!smallerThanSm;
-  const isTablet = !smallerThanSm && !!smallerThanLg;
-  const isDesktop = !smallerThanLg;
-
-  return { isMobile, isTablet, isDesktop, breakpoint };
+  return useMemo<ResponsiveInfo>(() => {
+    const isMobile = breakpoint === 'xs' || breakpoint === 'sm';
+    const isTablet = breakpoint === 'md';
+    const isDesktop = breakpoint === 'lg' || breakpoint === 'xl';
+    return { isMobile, isTablet, isDesktop, breakpoint };
+  }, [breakpoint]);
 };

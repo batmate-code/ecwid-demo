@@ -29,7 +29,7 @@ interface CartTableProps {
 
 const CartTableDesktop: FC<CartTableProps> = ({ cartProducts, onCheckout }) => {
   const { t } = useTranslation('cart');
-  const { color: anchorColor } = useGetOppositeColor();
+  const { textColor: anchorColor } = useGetOppositeColor();
 
   const addProduct = useStore(selectAddProduct);
   const removeProduct = useStore(selectRemoveProduct);

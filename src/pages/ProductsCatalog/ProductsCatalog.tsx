@@ -16,10 +16,14 @@ import { useResponsive } from '@/hooks/useResponsive';
 import { useGetCategoriesList } from '@/queries/useGetCategoriesList';
 import { useCategoriesNavigation } from './hooks/useCategoriesNavigation';
 import { useBuildUrl } from './hooks/useBuildUrl';
+import { useDisclosure } from '@mantine/hooks';
 
 const PAGE_SIZE = 6;
 
 const ProductsCatalog: FC = () => {
+  const [mobileFilterOpened, { open: openMobileFilter, close: closeMobileFilter }] =
+    useDisclosure(false);
+
   const { t } = useTranslation('catalog');
   const { isMobile, isTablet } = useResponsive();
   const { query, sort, page, priceFrom, priceTo, setParams } = useCatalogUrlState();
@@ -62,7 +66,11 @@ const ProductsCatalog: FC = () => {
     <Container size="lg">
       <CatalogHeader homeHref={homeHref} crumbs={breadcrumbItems} />
       {isMobile && (
-        <MobileFilters>
+        <MobileFilters
+          opened={mobileFilterOpened}
+          open={openMobileFilter}
+          close={closeMobileFilter}
+        >
           <Box>
             <SearchInput value={query} onChange={(value) => setParams({ query: value })} />
           </Box>
@@ -73,7 +81,7 @@ const ProductsCatalog: FC = () => {
             categories={visibleCategories}
             backHref={categoryBackHref}
           />
-          <FiltersCard />
+          <FiltersCard onCloseMobileFilter={closeMobileFilter} />
         </MobileFilters>
       )}
       <Grid mt="xs">
