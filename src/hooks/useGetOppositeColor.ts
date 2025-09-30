@@ -1,4 +1,4 @@
-import { Theme } from '@/components/ThemeToggle';
+import { Theme } from '@/style/globalTypes';
 import { useMantineColorScheme } from '@mantine/core';
 /**
  * Hook that returns an opposite Mantine color token to keep contrast when switching themes.

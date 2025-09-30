@@ -1,11 +1,11 @@
-import BackButton from '@/components/BackButton';
+import { BackButton } from '@/components';
 import { Button, Card, Text, Container, Group, Title } from '@mantine/core';
 import type { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ProductPageErrorScreen: FC = () => {
   const navigate = useNavigate();
-
+  // TODO TRANSLATIONS
   return (
     <Container size="lg">
       <BackButton onClick={() => navigate(-1)} mb="sm" />

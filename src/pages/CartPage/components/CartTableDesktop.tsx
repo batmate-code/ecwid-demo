@@ -1,8 +1,8 @@
-import useGetOppositeColor from '@/hooks/useGetOppositeColor';
-import { useStore } from '@/store';
-import { selectAddProduct, selectCartTotal, selectRemoveProduct } from '@/store/selectors';
-import type { CartItem } from '@/store/slices/cart';
-import { formatCurrency } from '@/utils/curencyFormatter';
+import useGetOppositeColor from 'hooks/useGetOppositeColor';
+import { useStore } from 'store';
+import { selectAddProduct, selectCartTotal, selectRemoveProduct } from 'store/selectors';
+import type { CartItem } from 'store/slices/cart';
+import { formatCurrency } from 'utils';
 import {
   Card,
   Table,

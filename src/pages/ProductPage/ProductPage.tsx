@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import ProductPageSkeleton from './components/ProductPageSkeleton';
 import ProductPageErrorScreen from './components/ProductPageErrorScreen';
 import ProductInfo from './components/ProductInfo';
-import BackButton from '@/components/BackButton';
+import { BackButton } from '@/components';
 import { useResponsive } from '@/hooks/useResponsive';
 
 const ProductPage: React.FC = () => {

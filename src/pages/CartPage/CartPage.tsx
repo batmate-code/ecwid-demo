@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 import { selectCartCount, selectCartProducts, selectClearCart } from '@/store/selectors';
 import { useState, type FC } from 'react';
 import EmptyCartScreen from './components/EmptyCartScreen';
-import BackButton from '@/components/BackButton';
+import { BackButton } from '@/components';
 import { useTranslation } from 'react-i18next';
 import CartView from './components/CartView';
 import CheckoutModal from './components/CheckoutModal';

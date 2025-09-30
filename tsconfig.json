@@ -1,17 +1,35 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@store": ["src/store/index.ts"],
-      "@store/*": ["src/store/*"],
-      "@pages/*": ["src/pages/*"],
-      "@queries": ["src/queries/index.ts"],
-      "@queries/": ["src/queries/*"],
-      "@api/": ["src/api/*"],
-      "@zod/": ["src/zod/*"]
-    }
-  }
+      "@/*": ["src/*"]
+      // "@store": ["src/store/index.ts"],
+      // "@utils": ["src/utils/index.ts"],
+      // "@style/*": ["src/style/*"],
+      // "@components": ["src/components/index.ts"],
+      // "@store/*": ["src/store/*"],
+      // "@pages/*": ["src/pages/*"],
+      // "@queries": ["src/queries/index.ts"],
+      // "@queries/*": ["src/queries/*"],
+      // "@api/*": ["src/api/*"],
+      // "@hooks/*": ["src/hooks/*"],
+      // "@zod/*": ["src/zod/*"]
+    },
+
+    "types": ["vite/client", "node"],
+
+    "strict": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }

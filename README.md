@@ -81,7 +81,7 @@ From your package.json:
 {
 "scripts": {
 "start": "vite", // dev server
-"build": "tsc -b && vite build", // type-check + production build
+"build": "build": "tsc --noEmit && vite build", // type-check + production build
 "preview": "vite preview", // serve built assets
 "lint": "eslint .", // lint all sources
 "prepare": "husky" // install git hooks
